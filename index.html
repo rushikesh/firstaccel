@@ -18,7 +18,7 @@
     // device APIs are available
     //
     function onDeviceReady() {
-        navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
+        navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError,{enableHighAccuracy: true});
         startWatch();
     }
 
