@@ -6,10 +6,10 @@
         id        = "com.rushis.firstaccel"
         version   = "1.0.0">
 
-    <name>PuzzleGame15</name>
+    <name>GeoAccel</name>
 
     <description>
-        15Puzzle Game.
+        GeoAccel
     </description>
 
     <author href="http://www.rushis.com" email="support@phonegap.com">
