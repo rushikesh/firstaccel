@@ -67,7 +67,7 @@
     <!--
         <gap:plugin name="com.phonegap.plugins.barcodescanner" />
     -->
-
+    <!-- <gap:plugin name="plugin.google.maps.menusito" version="1.2.5" /> -->
     <!-- Define app icon for each platform. This is a relative path to config.xml.
         For e.g. if you place an icon.png inside res folder, you should modify the
         src in the following setting to "res/icon.png" -->

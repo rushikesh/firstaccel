@@ -10,6 +10,9 @@
     // The watch id references the current `watchAcceleration`
     var watchID = null;
 
+    var accelData=[];
+    var geoData=[];
+
     // Wait for device API libraries to load
     //
     document.addEventListener("deviceready", onDeviceReady, false);
@@ -18,7 +21,6 @@
     // device APIs are available
     //
     function onDeviceReady() {
-        navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError,{enableHighAccuracy: true});
         startWatch();
     }
 
@@ -26,8 +28,8 @@
     //
     function startWatch() {
 
-        // Update acceleration every 3 seconds
-        var options = { frequency: 2000 };
+        // Update acceleration every 300 milli seconds
+        var options = { frequency: 300 };
 
         watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
     }
@@ -49,6 +51,8 @@
                             'Acceleration Y: ' + acceleration.y         + '<br />' +
                             'Acceleration Z: ' + acceleration.z         + '<br />' +
                             'Timestamp: '      + acceleration.timestamp + '<br />';
+        accelData.push(JSON.stringify(acceleration));
+        navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError,{enableHighAccuracy: true});
     }
 
     // onError: Failed to get the acceleration
@@ -58,7 +62,6 @@
     }
 
    // onSuccess Geolocation
-    //
     function onGeoSuccess(position) {
         var element = document.getElementById('geolocation');
         element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
@@ -69,6 +72,7 @@
                             'Heading: '            + position.coords.heading               + '<br />' +
                             'Speed: '              + position.coords.speed                 + '<br />' +
                             'Timestamp: '          + position.timestamp                    + '<br />';
+        geoData.push(JSON.stringify(position));                            
     }
 
     // onError Callback receives a PositionError object
@@ -78,11 +82,25 @@
               'message: ' + error.message + '\n');
     }
 
+    
+    function dumpData(){
+        var element1 = document.getElementById('dumpAccelData');
+        element1.innerHTML = accelData.join('\n');
+
+        var element2 = document.getElementById('dumpGeoData');
+        element2.innerHTML = geoData.join('\n');
+    }
 
     </script>
   </head>
   <body>
     <div id="accelerometer">Waiting for accelerometer...</div>
     <p id="geolocation">Finding geolocation...</p>
+    <input type="button" value="GetData" onClick="dumpData" />
+    <p>Accel Data</p>
+    <div id="dumpAccelData"></div>
+    <br/><br/>
+    <p>Geo Data</p>
+    <div id="dumpGeoData"></div>
   </body>
 </html>
