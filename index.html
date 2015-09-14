@@ -84,6 +84,7 @@
 
     
     function dumpData(){
+        stopWatch();
         var element1 = document.getElementById('dumpAccelData');
         element1.innerHTML = accelData.join('\n');
 
@@ -96,7 +97,9 @@
   <body>
     <div id="accelerometer">Waiting for accelerometer...</div>
     <p id="geolocation">Finding geolocation...</p>
-    <input type="button" value="GetData" onClick="dumpData" />
+    <input type="button" value="GetData" onClick="dumpData()" />
+    <input type="button" value="StopAccel" onClick="stopWatch()" />
+    <input type="button" value="StartAccel" onClick="startWatch()" />
     <p>Accel Data</p>
     <div id="dumpAccelData"></div>
     <br/><br/>
